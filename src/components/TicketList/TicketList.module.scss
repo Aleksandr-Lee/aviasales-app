@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.noResults {
+  width: 502px;
+  height: 184px;
+  background: $bgColor;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-left: 20px;
+  padding: 50px 50px;
+  p {
+    @include fontOptions();
+    font-size: 20px;
+    text-align: center;
+    color: #a0b0b9;
+  }
+}

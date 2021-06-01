@@ -1,0 +1,9 @@
+$bgColor: #ffffff;
+$colorGrey: #4a4a4a;
+$colorBlue: #2196f3;
+
+@mixin fontOptions() {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+}

@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.tabTicket {
+  @include fontOptions();
+  width: 251px;
+  height: 50px;
+  background: $bgColor;
+  border: 1px solid #dfe5ec;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: $colorGrey;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 5px 5px 5px 5px;
+  &__active {
+    background: $colorBlue;
+    color: $bgColor;
+  }
+}
+
+.sort__button {
+  margin-left: 20px;
+}
