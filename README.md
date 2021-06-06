@@ -1,1 +1,1 @@
-https://aviasales-app-beige.vercel.app
+https://aviasales-app-aleksandr-lee.vercel.app
