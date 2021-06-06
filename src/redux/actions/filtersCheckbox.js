@@ -1,5 +1,7 @@
+import reduxTypes from '../reduxTypes';
+
 const activeCheckbox = (checkbox) => ({
-  type: 'ACTIVE_CHECKBOX',
+  type: reduxTypes.setActiveFilter,
   checkbox,
 });
 

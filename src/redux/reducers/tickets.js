@@ -1,3 +1,5 @@
+import reduxTypes from '../reduxTypes';
+
 const initialState = {
   tickets: [],
   filteredTickets: [],
@@ -8,32 +10,32 @@ const initialState = {
 
 const ticketsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'GET_TICKETS':
+    case reduxTypes.getTickets:
       return {
         ...state,
         tickets: [...state.tickets, ...action.tickets],
       };
-    case 'GET_FILTRED_TICKETS':
+    case reduxTypes.getFilteredTickets:
       return {
         ...state,
         filteredTickets: action.filteredTickets,
       };
-    case 'GET_SEARCH_ID':
+    case reduxTypes.getSearchId:
       return {
         ...state,
         searchId: action.searchId,
       };
-    case 'COMPLETE_REQUEST':
+    case reduxTypes.completeRequest:
       return {
         ...state,
         completeDownload: true,
       };
-    case 'ERROR_DOWNLOAD_TICKETS':
+    case reduxTypes.errorDownloadTickets:
       return {
         ...state,
         errorDownloadTickets: state.errorDownloadTickets + 1,
       };
-    case 'COMPLETE_DOWNLOAD':
+    case reduxTypes.completeDownload:
       return {
         ...state,
         completeDownload: true,

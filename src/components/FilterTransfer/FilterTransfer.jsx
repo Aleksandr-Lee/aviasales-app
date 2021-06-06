@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import activeCheckbox from '../../redux/actions/filtersCheckbox';
@@ -10,15 +9,15 @@ const FilterTransfer = () => {
     (state) => state.filtersCheckboxReducer.checkbox
   );
 
-  const visibleCheckboxAll = (checkboxes, id) => {
+  const visibleCheckboxAll = (checkbox, id) => {
     if (id === 'all') {
-      return checkboxes.map((item) => ({
+      return checkbox.map((item) => ({
         ...item,
-        checked: !checkboxes[0].checked,
+        checked: !checkbox[0].checked,
       }));
     }
 
-    return checkboxes.map((item) => {
+    return checkbox.map((item) => {
       if (item.htmlFor === id) {
         return {
           ...item,
@@ -29,19 +28,19 @@ const FilterTransfer = () => {
     });
   };
 
-  const checkCheckboxAll = (checkboxes) => {
+  const checkCheckboxAll = (checkbox) => {
     if (
-      checkboxes[1].checked &&
-      checkboxes[2].checked &&
-      checkboxes[3].checked &&
-      checkboxes[4].checked
+      checkbox[1].checked &&
+      checkbox[2].checked &&
+      checkbox[3].checked &&
+      checkbox[4].checked
     ) {
-      return checkboxes.map((item) => ({
+      return checkbox.map((item) => ({
         ...item,
         checked: true,
       }));
     }
-    return checkboxes.map((item) => {
+    return checkbox.map((item) => {
       if (item.htmlFor === 'all') {
         return {
           ...item,

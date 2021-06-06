@@ -1,3 +1,5 @@
+import reduxTypes from '../reduxTypes';
+
 const initialState = {
   checkbox: [
     {
@@ -35,7 +37,7 @@ const initialState = {
 
 const filtersCheckboxReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ACTIVE_CHECKBOX':
+    case reduxTypes.setActiveFilter:
       return {
         ...state,
         checkbox: action.checkbox,

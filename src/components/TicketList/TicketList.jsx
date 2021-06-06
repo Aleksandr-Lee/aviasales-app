@@ -1,6 +1,6 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { v4 } from 'uuid';
 import Ticket from '../Ticket';
 import LoadingIndicator from '../LoadingIndicator';
 import classes from './TicketList.module.scss';
@@ -18,9 +18,9 @@ const TicketList = () => {
 
   const sliceTickets = filteredTickets.slice(0, 5);
 
-  const ticket = sliceTickets.map((item, index) => (
+  const ticket = sliceTickets.map((item) => (
     <Ticket
-      key={item.price + item.carrier + index}
+      key={item.price + item.carrier + v4()}
       price={item.price}
       segments={item.segments}
       carrier={item.carrier}

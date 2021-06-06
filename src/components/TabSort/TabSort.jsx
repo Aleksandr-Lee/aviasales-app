@@ -1,15 +1,14 @@
-/* eslint-disable no-shadow */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionActiveButton } from '../../redux/actions/sortTickets';
+import actionActiveSort from '../../redux/actions/sortTickets';
 import classes from './TabSort.module.scss';
 
 const TabSort = () => {
   const dispatch = useDispatch();
   const sortButtons = useSelector((state) => state.sortTicketsReducer.button);
 
-  const changeActiveBtn = (sortButtons, id) =>
-    sortButtons.map((item) => {
+  const changeActiveSort = (sortButton, id) =>
+    sortButton.map((item) => {
       if (item.id === id) {
         return {
           ...item,
@@ -22,8 +21,8 @@ const TabSort = () => {
       };
     });
 
-  const activeButton = (event) => {
-    dispatch(actionActiveButton(changeActiveBtn(sortButtons, event.target.id)));
+  const activeSort = (event) => {
+    dispatch(actionActiveSort(changeActiveSort(sortButtons, event.target.id)));
   };
 
   const sortButtonsItems = sortButtons.map((item) => {
@@ -37,7 +36,7 @@ const TabSort = () => {
         key={item.id}
         id={item.id}
         className={activeClass}
-        onClick={activeButton}
+        onClick={activeSort}
       >
         {item.name}
       </button>

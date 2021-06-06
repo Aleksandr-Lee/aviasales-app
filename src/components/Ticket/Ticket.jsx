@@ -1,19 +1,33 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './Ticket.module.scss';
+
+const HOURS_IN_DAY = 24;
+const MINUTES_IN_HOUR = 60;
+const SECONDS_IN_MINUTE = 60;
+const MILLISECONDS_IN_SECOND = 1000;
 
 const Ticket = ({ price, segments, carrier }) => {
   const timeDepartureOfArrival = (duration) => {
-    let hours = parseInt((duration / 3600000) % 24, 10);
-    let minutes = parseInt((duration / 60000) % 60, 10);
+    let hours = parseInt(
+      (duration /
+        (MILLISECONDS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR)) %
+        HOURS_IN_DAY,
+      10
+    );
+    let minutes = parseInt(
+      (duration / (MILLISECONDS_IN_SECOND * SECONDS_IN_MINUTE)) %
+        MINUTES_IN_HOUR,
+      10
+    );
     hours = `0${hours}`.slice(-2);
     minutes = `0${minutes}`.slice(-2);
     return `${hours}:${minutes}`;
   };
 
   const travelTime = (min) => {
-    const hours = `0${Math.trunc(min / 60)}`.slice(-2);
-    const minutes = `0${min % 60}`.slice(-2);
+    const hours = `0${Math.trunc(min / MINUTES_IN_HOUR)}`.slice(-2);
+    const minutes = `0${min % SECONDS_IN_MINUTE}`.slice(-2);
     return `${hours}ч ${minutes}м`;
   };
 
@@ -43,7 +57,8 @@ const Ticket = ({ price, segments, carrier }) => {
         <p className={classes.infoTime__text}>
           {timeDepartureOfArrival(Date.parse(item.date))} –{' '}
           {timeDepartureOfArrival(
-            item.duration * 60000 + Date.parse(item.date)
+            item.duration * (MILLISECONDS_IN_SECOND * SECONDS_IN_MINUTE) +
+              Date.parse(item.date)
           )}
         </p>
         <p className={classes.infoTime__text}>{travelTime(item.duration)}</p>
@@ -67,6 +82,17 @@ const Ticket = ({ price, segments, carrier }) => {
       {segment}
     </div>
   );
+};
+
+Ticket.propTypes = {
+  price: PropTypes.number,
+  carrier: PropTypes.string,
+  segments: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+Ticket.defaultProps = {
+  price: 0,
+  carrier: '',
 };
 
 export default Ticket;

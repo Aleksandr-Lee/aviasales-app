@@ -1,26 +1,28 @@
+import reduxTypes from '../reduxTypes';
+
 export const actionTickets = (tickets) => ({
-  type: 'GET_TICKETS',
+  type: reduxTypes.getTickets,
   tickets,
 });
 
 export const actionFilteredTickets = (filteredTickets) => ({
-  type: 'GET_FILTRED_TICKETS',
+  type: reduxTypes.getFilteredTickets,
   filteredTickets,
 });
 
 export const actionSearchId = (searchId) => ({
-  type: 'GET_SEARCH_ID',
+  type: reduxTypes.getSearchId,
   searchId,
 });
 
 export const actionCompleteRequest = () => ({
-  type: 'COMPLETE_REQUEST',
+  type: reduxTypes.completeRequest,
 });
 
 export const actionErrorDownloadTickets = () => ({
-  type: 'ERROR_DOWNLOAD_TICKETS',
+  type: reduxTypes.errorDownloadTickets,
 });
 
 export const actionCompleteDownload = () => ({
-  type: 'COMPLETE_DOWNLOAD',
+  type: reduxTypes.completeDownload,
 });

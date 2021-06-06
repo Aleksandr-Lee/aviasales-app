@@ -1,9 +1,8 @@
-export const actionActiveButton = (button) => ({
-  type: 'ACTIVE_BUTTON',
+import reduxTypes from '../reduxTypes';
+
+const actionActiveSort = (button) => ({
+  type: reduxTypes.setActiveSort,
   button,
 });
 
-export const actionChangeButton = (button) => ({
-  type: 'CHANGE_BUTTON',
-  button,
-});
+export default actionActiveSort;

@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-shadow */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './App.module.scss';
@@ -18,7 +16,6 @@ import {
 } from '../../redux/actions/tickets';
 
 const App = () => {
-  const ticketsService = new TicketsService();
   const dispatch = useDispatch();
   const tickets = useSelector((state) => state.ticketsReducer.tickets);
   const searchId = useSelector((state) => state.ticketsReducer.searchId);
@@ -30,52 +27,73 @@ const App = () => {
     (state) => state.ticketsReducer.errorDownloadTickets
   );
 
-  const filterTickets = (ticket) => {
-    const newArrFilterTickets = [];
-    if (checkboxes[0].checked) return ticket;
-    checkboxes.forEach((checkbox) => {
-      const arrFilterTickets = ticket.filter((item) => {
-        if (
-          (checkbox.checked &&
-            item.segments[0].stops.length === checkbox.filter) ||
-          (checkbox.checked &&
-            item.segments[1].stops.length === checkbox.filter)
-        ) {
-          return true;
-        }
-        return false;
-      });
-      return newArrFilterTickets.push(...arrFilterTickets);
-    });
-    return newArrFilterTickets;
-  };
+  const filterTickets = useCallback(
+    (ticket) => {
+      const allCheckbox = checkboxes[0].checked;
+      if (allCheckbox) return ticket;
+      return checkboxes.reduce((newArr, checkbox) => {
+        const arrFilterTickets = ticket.filter(
+          (item) =>
+            (checkbox.checked &&
+              item.segments[0].stops.length === checkbox.filter) ||
+            (checkbox.checked &&
+              item.segments[1].stops.length === checkbox.filter)
+        );
+        return newArr.concat(...arrFilterTickets);
+      }, []);
+    },
+    [checkboxes]
+  );
 
-  const sortButton = (tickets) => {
-    if (sortButtons[0].active) {
-      return tickets.sort((prev, next) => prev.price - next.price);
-    }
-    if (sortButtons[1].active) {
-      return tickets.sort(
-        (prev, next) =>
-          prev.segments[0].duration +
-          prev.segments[1].duration -
-          (next.segments[0].duration + next.segments[1].duration)
-      );
-    }
-    return tickets;
-  };
+  //   const filterTickets = useCallback(
+  //     (ticket) => {
+  //       const newArrFilterTickets = [];
+  //       const allCheckbox = checkboxes[0].checked;
+  //       if (allCheckbox) return ticket;
+  //       checkboxes.forEach((checkbox) => {
+  //         const arrFilterTickets = ticket.filter(
+  //           (item) =>
+  //             (checkbox.checked &&
+  //               item.segments[0].stops.length === checkbox.filter) ||
+  //             (checkbox.checked &&
+  //               item.segments[1].stops.length === checkbox.filter)
+  //         );
+  //         newArrFilterTickets.push(...arrFilterTickets);
+  //       });
+  //       return newArrFilterTickets;
+  //     },
+  //     [checkboxes]
+  //   );
+
+  const sortButton = useCallback(
+    (ticket) => {
+      if (sortButtons[0].active) {
+        return ticket.sort((prev, next) => prev.price - next.price);
+      }
+      if (sortButtons[1].active) {
+        return ticket.sort(
+          (prev, next) =>
+            prev.segments[0].duration +
+            prev.segments[1].duration -
+            (next.segments[0].duration + next.segments[1].duration)
+        );
+      }
+      return ticket;
+    },
+    [sortButtons]
+  );
 
   const resultFlteredTickets = sortButton(filterTickets(tickets));
   useEffect(() => {
     dispatch(actionFilteredTickets(resultFlteredTickets));
-  }, [dispatch, tickets, filterTickets, sortButtons, checkboxes]);
+  }, [dispatch, tickets, sortButtons, sortButton, resultFlteredTickets]);
 
   const ticketsDisplay = useCallback(() => {
-    ticketsService
+    new TicketsService()
       .getTickets(searchId)
-      .then((tickets) => {
-        dispatch(actionTickets(tickets.tickets));
-        if (tickets.stop === false) {
+      .then((ticket) => {
+        dispatch(actionTickets(ticket.tickets));
+        if (ticket.stop === false) {
           ticketsDisplay();
         } else {
           dispatch(actionCompleteRequest());
@@ -91,8 +109,8 @@ const App = () => {
   }, [searchId, dispatch, errorDownloadTickets]);
 
   useEffect(() => {
-    ticketsService.getSearchId().then((searchId) => {
-      dispatch(actionSearchId(searchId.searchId));
+    new TicketsService().getSearchId().then((id) => {
+      dispatch(actionSearchId(id.searchId));
     });
   }, [dispatch]);
 
@@ -100,7 +118,7 @@ const App = () => {
     if (searchId !== null) {
       ticketsDisplay();
     }
-  }, [dispatch, ticketsDisplay]);
+  }, [dispatch, searchId, ticketsDisplay]);
 
   return (
     <div>
