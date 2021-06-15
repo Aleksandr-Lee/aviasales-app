@@ -45,26 +45,6 @@ const App = () => {
     [checkboxes]
   );
 
-  //   const filterTickets = useCallback(
-  //     (ticket) => {
-  //       const newArrFilterTickets = [];
-  //       const allCheckbox = checkboxes[0].checked;
-  //       if (allCheckbox) return ticket;
-  //       checkboxes.forEach((checkbox) => {
-  //         const arrFilterTickets = ticket.filter(
-  //           (item) =>
-  //             (checkbox.checked &&
-  //               item.segments[0].stops.length === checkbox.filter) ||
-  //             (checkbox.checked &&
-  //               item.segments[1].stops.length === checkbox.filter)
-  //         );
-  //         newArrFilterTickets.push(...arrFilterTickets);
-  //       });
-  //       return newArrFilterTickets;
-  //     },
-  //     [checkboxes]
-  //   );
-
   const sortButton = useCallback(
     (ticket) => {
       if (sortButtons[0].active) {

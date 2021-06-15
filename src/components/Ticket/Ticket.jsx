@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import constants from '../../constants';
 import classes from './Ticket.module.scss';
 
 const HOURS_IN_DAY = 24;
@@ -34,11 +35,11 @@ const Ticket = ({ price, segments, carrier }) => {
   const numberOfTransfers = (lenght) => {
     switch (lenght) {
       case 0:
-        return `БЕЗ ПЕРЕСАДОК`;
+        return constants.WITHOUT_TRANSFERS;
       case 1:
-        return `${lenght} ПЕРЕСАДКА`;
+        return `${lenght} ${constants.TRANSFER}`;
       default:
-        return `${lenght} ПЕРЕСАДКИ`;
+        return `${lenght} ${constants.TRANSFERS}`;
     }
   };
 

@@ -26,7 +26,7 @@ const TabSort = () => {
   };
 
   const sortButtonsItems = sortButtons.map((item) => {
-    const activeClass = item.active
+    const classNames = item.active
       ? `${classes.tabTicket} ${classes.tabTicket__active}`
       : `${classes.tabTicket}`;
 
@@ -35,7 +35,7 @@ const TabSort = () => {
         type="button"
         key={item.id}
         id={item.id}
-        className={activeClass}
+        className={classNames}
         onClick={activeSort}
       >
         {item.name}

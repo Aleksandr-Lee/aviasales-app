@@ -1,28 +1,28 @@
-import reduxTypes from '../reduxTypes';
+import actionTypes from '../actionTypes';
 
 export const actionTickets = (tickets) => ({
-  type: reduxTypes.getTickets,
+  type: actionTypes.getTickets,
   tickets,
 });
 
 export const actionFilteredTickets = (filteredTickets) => ({
-  type: reduxTypes.getFilteredTickets,
+  type: actionTypes.getFilteredTickets,
   filteredTickets,
 });
 
 export const actionSearchId = (searchId) => ({
-  type: reduxTypes.getSearchId,
+  type: actionTypes.getSearchId,
   searchId,
 });
 
 export const actionCompleteRequest = () => ({
-  type: reduxTypes.completeRequest,
+  type: actionTypes.completeRequest,
 });
 
 export const actionErrorDownloadTickets = () => ({
-  type: reduxTypes.errorDownloadTickets,
+  type: actionTypes.errorDownloadTickets,
 });
 
 export const actionCompleteDownload = () => ({
-  type: reduxTypes.completeDownload,
+  type: actionTypes.completeDownload,
 });

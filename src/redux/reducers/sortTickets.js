@@ -1,4 +1,4 @@
-import reduxTypes from '../reduxTypes';
+import actionTypes from '../actionTypes';
 
 const initialState = {
   button: [
@@ -17,7 +17,7 @@ const initialState = {
 
 const sortTicketsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case reduxTypes.setActiveSort:
+    case actionTypes.setActiveSort:
       return {
         ...state,
         button: action.button,

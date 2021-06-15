@@ -1,4 +1,4 @@
-const reduxTypes = {
+const actionTypes = {
   setActiveFilter: 'SET_ACTIVE_FILTER',
   setActiveSort: 'SET_ACTIVE_SORT',
   getTickets: 'GET_TICKETS',
@@ -9,4 +9,4 @@ const reduxTypes = {
   completeDownload: 'COMPLETE_DOWNLOAD',
 };
 
-export default reduxTypes;
+export default actionTypes;

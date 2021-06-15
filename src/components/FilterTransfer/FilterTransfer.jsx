@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import activeCheckbox from '../../redux/actions/filtersCheckbox';
+import constants from '../../constants';
 import classes from './FilterTransfer.module.scss';
 
 const FilterTransfer = () => {
@@ -10,7 +11,7 @@ const FilterTransfer = () => {
   );
 
   const visibleCheckboxAll = (checkbox, id) => {
-    if (id === 'all') {
+    if (id === constants.ALL) {
       return checkbox.map((item) => ({
         ...item,
         checked: !checkbox[0].checked,
@@ -41,7 +42,7 @@ const FilterTransfer = () => {
       }));
     }
     return checkbox.map((item) => {
-      if (item.htmlFor === 'all') {
+      if (item.htmlFor === constants.ALL) {
         return {
           ...item,
           checked: false,

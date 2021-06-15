@@ -1,7 +1,7 @@
-import reduxTypes from '../reduxTypes';
+import actionTypes from '../actionTypes';
 
 const actionActiveSort = (button) => ({
-  type: reduxTypes.setActiveSort,
+  type: actionTypes.setActiveSort,
   button,
 });
 
